@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "holoman",
+      "type": "me.doyun.SampleProperties",
+      "sourceType": "me.doyun.SampleProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "holoman.how-long",
+      "type": "java.lang.Integer",
+      "sourceType": "me.doyun.SampleProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "holoman.name",
+      "type": "java.lang.String",
+      "sourceType": "me.doyun.SampleProperties"
+    },
+    {
+      "name": "holoman.valid-data",
+      "type": "java.lang.String",
+      "sourceType": "me.doyun.SampleProperties"
+    }
+  ],
+  "hints": []
+}
