@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    일일히 bean으로 등록하는게 번거롭기 때문에 이 방식을 사용하지 않고, context 태그를 이용하게 됨.-->
+<!--    <bean id="bookService" -->
+<!--          class="com.example.springapplicationcontext.BookService">-->
+<!--        <property name="bookRepository" ref="bookRepository"></property>-->
+<!--    </bean>-->
+<!--    <bean id="bookRepository"-->
+<!--          class="com.example.springapplicationcontext.BookRepository"></bean>-->
+
+    <context:component-scan base-package="com.example.springapplicationcontext"></context:component-scan>
+
+
+</beans>
