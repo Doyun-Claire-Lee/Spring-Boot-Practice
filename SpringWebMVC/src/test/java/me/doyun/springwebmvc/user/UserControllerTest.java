@@ -54,7 +54,7 @@ public class UserControllerTest {
 
         //org.springframework.web.HttpMediaTypeNotAcceptableException발생
         // => MediaType을 처리할 HttpMessageConverter가 없기 때문에 발생
-        // => Dependecy로 XML컨버터를 추가해줌. 
+        // => Dependecy로 XML컨버터를 추가해줌.
 
     }
 
