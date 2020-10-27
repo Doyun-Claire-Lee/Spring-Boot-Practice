@@ -1,5 +1,8 @@
 package me.doyun.springwebsecurity.form;
 
+import me.doyun.springwebsecurity.account.AccountContext;
+import me.doyun.springwebsecurity.account.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,12 @@ import java.security.Principal;
 
 @Controller
 public class SampleController {
+
+    @Autowired
+    SampleService sampleService;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
@@ -28,6 +37,11 @@ public class SampleController {
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal) {
         model.addAttribute("message", "Hello " + principal.getName());
+
+        //setAccount를 통해 TheadLocal에 Account 정보를 넣음.
+        AccountContext.setAccount(accountRepository.findByUsername(principal.getName()));
+        sampleService.dashboard();
+
         return "dashboard";
     }
     @GetMapping("/admin")

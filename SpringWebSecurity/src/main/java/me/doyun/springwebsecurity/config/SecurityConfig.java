@@ -14,7 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .mvcMatchers("/", "/info").permitAll()  //루트와 info 페이지는 모든 방법으로 접근 가능
+                .mvcMatchers("/", "/info", "/account/**").permitAll()  //루트와 info 페이지는 모든 방법으로 접근 가능
                 .mvcMatchers("/admin").hasRole("ADMIN")  //admin페이지는 ADMIN으로만 접근 가능
                 .anyRequest().authenticated()                    //기타 페이지는 인증받으면(로그인하면) 접근 가능
                 .and()
@@ -23,10 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("doyun").password("{noop}123").roles("USER").and()
-                .withUser("admin").password("{noop}!@#").roles("ADMIN");
-    }
+//  인메모리 유저 추가
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("doyun").password("{noop}123").roles("USER").and()
+//                .withUser("admin").password("{noop}!@#").roles("ADMIN");
+//    }
 }
