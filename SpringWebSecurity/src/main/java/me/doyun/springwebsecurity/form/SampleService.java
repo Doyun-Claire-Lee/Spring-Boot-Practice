@@ -5,6 +5,7 @@ import me.doyun.springwebsecurity.account.AccountContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,7 +26,15 @@ public class SampleService {
         //TreadLocal을 사용해서 Account 정보 가져오기
         Account account = AccountContext.getAccount();
         System.out.println("=========================");
-        System.out.println(account.getUsername());
+        System.out.println("TreadLocal: " + account.getUsername());
+
+        //SecurityContextHolder를 통해 계정 정보 가져오기
+        //어떻게 계정정보가 유지되느냐? -> SecurityContextPersistenceFilter를 통해..
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        System.out.println("=========================");
+        System.out.println(authentication);
+        System.out.println("SecurityContextHolder: " + userDetails.getUsername());
 
     }
 }
