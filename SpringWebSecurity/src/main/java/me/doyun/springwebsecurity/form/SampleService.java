@@ -2,6 +2,8 @@ package me.doyun.springwebsecurity.form;
 
 import me.doyun.springwebsecurity.account.Account;
 import me.doyun.springwebsecurity.account.AccountContext;
+import me.doyun.springwebsecurity.common.SecurityLogger;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,5 +38,11 @@ public class SampleService {
         System.out.println(authentication);
         System.out.println("SecurityContextHolder: " + userDetails.getUsername());
 
+    }
+
+    @Async
+    public void asyncService() {
+        SecurityLogger.log("Async Service");
+        System.out.println("Async Service is called");
     }
 }

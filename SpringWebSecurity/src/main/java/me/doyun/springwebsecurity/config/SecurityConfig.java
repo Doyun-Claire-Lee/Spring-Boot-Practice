@@ -1,5 +1,6 @@
 package me.doyun.springwebsecurity.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -11,6 +12,7 @@ import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -24,6 +26,18 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        //파비콘에는 시큐리티 적용을 하지 않고 싶은 경우 : ignoring() 메소드를 사용한다.
+        web.ignoring().mvcMatchers("/favicon.io");
+
+        //혹은 스프링 부트가 제공하는 pathRequest를 사용해서 정적 자원 요청의 필터를 제외할 수 있다.
+/*
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        web.ignoring().requestMatchers(PathRequest.toH2Console());
+*/
+    }
 
     public AccessDecisionManager accessDecisionManager() {
 
@@ -45,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .mvcMatchers("/", "/info", "/account/**").permitAll()  //루트와 info 페이지는 모든 방법으로 접근 가능
+                .mvcMatchers("/", "/info", "/account/**", "/signup").permitAll()  //루트와 info 페이지는 모든 방법으로 접근 가능
                 .mvcMatchers("/admin").hasRole("ADMIN")  //admin페이지는 ADMIN으로만 접근 가능
                 .mvcMatchers("/user").hasRole("USER")  //user페이지는 USER로만 접근 가능(ADMIN도 접근 불가능, 오로지 USER만)
                 .anyRequest().authenticated()                   //기타 페이지는 인증받으면(로그인하면) 접근 가능
