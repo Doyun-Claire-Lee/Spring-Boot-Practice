@@ -57,6 +57,12 @@
             </exclusions>
         </dependency>
 
+<!--        View에서 간단하게 인증 정보를 참조하고 싶을 때 사용-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>

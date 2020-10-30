@@ -66,8 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDecisionManager(accessDecisionManager()) //각 역할들의 위계를 이해하도록 accessDecisionManager를 새로 정의하여 사용해줌.
                 .and()
             .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
             .httpBasic();
+        http.exceptionHandling()
+                .accessDeniedPage("/access-denied");
     }
 
 //  인메모리 유저 추가
