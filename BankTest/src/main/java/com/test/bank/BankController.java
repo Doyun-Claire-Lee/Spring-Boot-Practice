@@ -33,19 +33,7 @@ public class BankController {
         dto.setName(name);
         dto.setPassword(password);
 
-        int result = customerService.validate(dto);
-        System.out.println("로그인 결과 확인: " + result);
-
-        if (result == 1) {
-            //로그인 정보 일치시
-            try {
-                response.sendRedirect("/list");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            customerService.printError(request, response);
-        }
+        customerService.validate(request, response, dto);
     }
 
     @GetMapping("/list")
