@@ -47,8 +47,6 @@ public class UserService implements UserDetailsService {
             User newUser = this.save(user);
             System.out.println(newUser);
         }
-
-
     }
 
     @Override

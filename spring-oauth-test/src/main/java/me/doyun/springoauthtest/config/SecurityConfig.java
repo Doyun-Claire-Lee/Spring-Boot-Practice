@@ -60,23 +60,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //Resource 이외의 인증처리
         http
-                .cors()
-                    .and()
                 .csrf().disable()
-                .anonymous().disable()
                 .authorizeRequests()
-                    .antMatchers("/api-docs/**").permitAll();    //쓰지도 않는건데 뭐하러 했는지 궁금하다 함..
+                    .antMatchers("/", "/login").permitAll()
+                    .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/oauth/client", true)
+                .and()
+                .httpBasic();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return  source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("*"));
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return  source;
+//    }
 
 }

@@ -1,5 +1,8 @@
 package me.doyun.springoauthtest.users;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,17 +10,21 @@ import javax.persistence.Id;
 @Entity
 public class User {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue
+    private Integer id;
+
+    @Column(unique = true)
     private String username;
+
     private String password;
 
-    public Long getId() {
+    private String role;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,12 +44,25 @@ public class User {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
