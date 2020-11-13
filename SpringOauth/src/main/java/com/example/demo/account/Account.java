@@ -1,5 +1,6 @@
 package com.example.demo.account;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,13 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class Account {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
-
-    private String username;
-    private String password;
-    private String role;
+    private String accountNumber;
+    private Long bankId;
 
     public Long getId() {
         return id;
@@ -23,37 +21,19 @@ public class Account {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public String getPassword() {
-        return password;
+    public Long getBankId() {
+        return bankId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+    public void setBankId(Long bankId) {
+        this.bankId = bankId;
     }
 }
