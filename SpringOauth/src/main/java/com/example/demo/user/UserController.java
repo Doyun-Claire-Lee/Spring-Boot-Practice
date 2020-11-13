@@ -26,14 +26,14 @@ public class UserController {
     public String login() {
         return "login";
     }
-    @PostMapping("/login")
-    public String loginValid(String username, String password) {
-        System.out.println(username);
-        System.out.println(password);
-
-        return "redirect:user";
-
-    }
+//    @PostMapping("/login")
+//    public String loginValid(String username, String password) {
+//        System.out.println(username);
+//        System.out.println(password);
+//
+//        return "redirect:user";
+//
+//    }
 
 
     @RequestMapping("/user")

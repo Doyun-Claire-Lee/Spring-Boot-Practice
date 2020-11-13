@@ -29,12 +29,23 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        super.configure(clients);
+        clients
+                .inMemory()
+                .withClient("test-client")
+                .secret(passwordEncoder.encode("test-secret"))
+                .authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token")
+                .scopes("read", "write", "trust")
+                .accessTokenValiditySeconds(1*60*60)
+                .refreshTokenValiditySeconds(6*60*60);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        super.configure(endpoints);
+        endpoints
+                .tokenStore(tokenStore)
+                .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService);
+
     }
 
 
