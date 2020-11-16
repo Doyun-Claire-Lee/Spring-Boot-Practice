@@ -41,14 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-
+                .csrf().disable()
                 .authorizeRequests()
-                    .mvcMatchers( "/", "/login").permitAll()
+                    .antMatchers( "/", "/login").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/user", false);
+                    .defaultSuccessUrl("/user", true)
+                .and()
+                .csrf().disable();
 
 
 

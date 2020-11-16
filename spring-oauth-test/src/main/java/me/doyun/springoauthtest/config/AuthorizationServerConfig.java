@@ -37,7 +37,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .inMemory()
             .withClient("test-client")
             .secret(passwordEncoder.encode("test-secret"))
-            .authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token")
+            .authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token", "password")
             .scopes("read", "write", "trust")
             .accessTokenValiditySeconds(1*60*60)
             .refreshTokenValiditySeconds(6*60*60);

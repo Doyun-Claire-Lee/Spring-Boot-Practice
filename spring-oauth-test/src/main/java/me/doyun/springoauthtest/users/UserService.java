@@ -19,10 +19,10 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -44,6 +44,7 @@ public class UserService implements UserDetailsService {
             User user = new User();
             user.setUsername("doyun");
             user.setPassword("pass");
+            user.setRole("ROLE_USER");
             User newUser = this.save(user);
             System.out.println(newUser);
         }

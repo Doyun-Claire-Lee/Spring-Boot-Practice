@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Banks</title>
 </head>
 <body>
     <ul>
-        <li></li>
+        <li th:each="bank : ${bankList}" >
+            <span th:text="${bank.bankName}"></span>
+        </li>
     </ul>
 </body>
 </html>

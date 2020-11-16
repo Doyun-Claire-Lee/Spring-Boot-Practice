@@ -1,5 +1,6 @@
 package me.doyun.springoauthtest.bank;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +11,7 @@ public class Bank {
     @Id
     @GeneratedValue
     private Long id;
-
-    private String name;
+    private String bankName;
 
     public Long getId() {
         return id;
@@ -21,11 +21,12 @@ public class Bank {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
+
 }

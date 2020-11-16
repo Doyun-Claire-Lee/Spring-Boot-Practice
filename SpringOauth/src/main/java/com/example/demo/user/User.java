@@ -7,11 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -87,7 +89,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        //Retune Authorities of User only in GrantedAuthority type
+        //Return Authorities of User only in GrantedAuthority type
         Set<GrantedAuthority> roles = new HashSet<>();
 
         for (String role : this.role.split(",")) {

@@ -12,12 +12,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -61,14 +57,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Resource 이외의 인증처리
         http
                 .csrf().disable()
+                .cors()
+                .and()
+                .anonymous().disable()
                 .authorizeRequests()
                     .antMatchers("/", "/login").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/oauth/client", true)
-                .and()
+//                .formLogin()
+//                    .loginPage("/login")
+//                    .defaultSuccessUrl("/oauth/token", true)
+//                    .permitAll()
+//                .and()
                 .httpBasic();
     }
 
