@@ -28,7 +28,7 @@ public class CommonController {
         try {
 
             //Create Header
-            HttpHeaders headers = new HttpHeaders();
+            HttpHeaders headers = createHttpHeaders("test-client", "test-secret");
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("Authorization", "Bearer " + getToken());
 
