@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Banks</title>
+    <title>Bank</title>
 </head>
 <body>
+    <h1>은행 목록</h1>
     <ul>
-        <li th:each="bank : ${bankList}" >
-            <span th:text="${bank.bankName}"></span>
+        <li th:each="bank : ${bankList}">
+            <p th:text="${bank.bankName}"></p>
+            <a href="http://localhost:8080/oauth/authorize?client_id=&redirect_uri=&response_type=code">계좌 확인</a>
         </li>
     </ul>
 </body>

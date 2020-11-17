@@ -1,4 +1,4 @@
-package me.doyun.springoauthtest.config;
+package com.test.allbank.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +19,6 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //두 서버에서 사용할 전반적인 Security 설정하기
-
-    @Resource(name="userService")
-    private UserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder encoder() {
@@ -47,28 +43,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Resource 이외의 인증처리
         http
                 .csrf().disable()
-                .cors()
-                .and()
                 .anonymous().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/login").permitAll()
-                    .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                    .anyRequest().authenticated();
+//                .and()
+//                .formLogin()
 //                    .loginPage("/login")
 //                    .defaultSuccessUrl("/oauth/token", true)
-                .and()
-                .httpBasic();
+//                    .permitAll()
+//                .and()
+//                .httpBasic();
     }
 
 //    @Bean

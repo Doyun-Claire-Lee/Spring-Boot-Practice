@@ -1,4 +1,4 @@
-package me.doyun.springoauthtest.bank;
+package com.test.allbank.bank;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -4,6 +4,7 @@ package me.doyun.springoauthtest.account;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -30,4 +31,7 @@ public class AccountService {
     }
 
 
+    public List<Account> findAll() {
+        return repository.findAll();
+    }
 }

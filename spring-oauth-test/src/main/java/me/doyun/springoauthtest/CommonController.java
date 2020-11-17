@@ -1,20 +1,20 @@
 package me.doyun.springoauthtest;
 
-import com.sun.deploy.net.HttpResponse;
+import me.doyun.springoauthtest.bank.Bank;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
+import java.util.List;
 
 @Controller
 public class CommonController {
@@ -34,18 +34,16 @@ public class CommonController {
 
             HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(headers);
 
-            ResponseEntity<JSONArray> response = restTemplate.exchange(url, HttpMethod.GET, entity, JSONArray.class);
+            ResponseEntity<List<Bank>> response = restTemplate.exchange(url, HttpMethod.GET, entity, new ParameterizedTypeReference<List<Bank>>() {
+            });
 
-            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
-            model.addAttribute("bankList", response.getBody());
+            List<Bank> bankList = response.getBody();
+            model.addAttribute("bankList", bankList);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-        return "redirect:/bank";
+        return "bank";
     }
 
     public String getToken() {
@@ -95,6 +93,10 @@ public class CommonController {
         return "index";
     }
 
+    @RequestMapping("/callback")
+    public @ResponseBody String getCode(String code) {
+        return code;
+    }
 
 
 }
