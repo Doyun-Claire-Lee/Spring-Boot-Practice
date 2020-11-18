@@ -1,6 +1,6 @@
 package com.test.fourvalueasset.bank;
 
-public class Bank {
+public class BankDTO {
 
     private Long id;
     private String bankName;

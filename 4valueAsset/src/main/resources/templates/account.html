@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+    <h1>포밸류 뱅크</h1>
+
+    <ul>
+        <li th:each="account : ${accountList}">
+            <p th:text="${account.bankName}"></p>
+            <p th:text="${account.accountNumber}"></p>
+        </li>
+    </ul>
+</body>
+</html>
