@@ -36,8 +36,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .withClient("test-client")
             .secret(passwordEncoder.encode("test-secret"))
             .authorizedGrantTypes("authorization_code")
-            .redirectUris("http://localhost:8080/callback")
-            .scopes("read", "write", "trust");
+//            .redirectUris("http://localhost:8080/callback")
+            .scopes("read", "write", "trust")
+            .autoApprove(true);
     }
 
     @Override
