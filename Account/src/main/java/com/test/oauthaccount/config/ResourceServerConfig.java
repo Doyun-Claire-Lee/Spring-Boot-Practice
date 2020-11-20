@@ -23,11 +23,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         //실제 인증을 처리하는 설정을 하는 곳(Resource 관련)
+
         http
                 .authorizeRequests()
-                    .antMatchers("/account/**").authenticated()
-                    .and()
+                    .anyRequest()
+                    .authenticated()
+                .and()
+                .requestMatchers()
+                    .antMatchers("/account/**")
+                .and()
                 .exceptionHandling()
                     .accessDeniedHandler(new OAuth2AccessDeniedHandler());
+
     }
 }

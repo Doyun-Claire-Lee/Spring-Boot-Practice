@@ -44,7 +44,7 @@ public class CommonService {
             //JSONObject로 받으면 Null값 나옴.. String으로 받아 Parsing하기
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
-            System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
+            System.out.println("Result(:9000) - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
             Gson gson = new GsonBuilder().create();
             TokenDTO tokenDTO = gson.fromJson(response.getBody(), TokenDTO.class);
             token = tokenDTO.getAccess_token();
@@ -79,7 +79,7 @@ public class CommonService {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         Gson gson = new GsonBuilder().create();
         TokenDTO tokenDTO = gson.fromJson(response.getBody(), TokenDTO.class);
-        System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
+        System.out.println("Result(:9010) - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
 
         token = tokenDTO.getAccess_token();
 

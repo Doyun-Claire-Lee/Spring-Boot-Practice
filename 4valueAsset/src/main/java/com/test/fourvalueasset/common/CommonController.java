@@ -15,6 +15,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.extras.springsecurity5.auth.Authorization;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class CommonController {
     }
 
     @RequestMapping("/callback")
-    public String callback(Model model, String code) {
+    public String callback(String code, RedirectAttributes redirectAttributes) {
 
         String token = service.getAuthToken(code);
         System.out.println(token);
@@ -65,6 +66,7 @@ public class CommonController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("Authorization", "Bearer " + token);
+            headers.add("redirect_uri", "http://localhost:8080/callback");
 
             HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(headers);
 
@@ -75,10 +77,7 @@ public class CommonController {
             List<AccountDTO> accountList = response.getBody();
             System.out.println("Result - status ("+ response.getStatusCode() + ") has body: " + response.getBody());
 
-
-            model.addAttribute("accountList", accountList);
-
-
+            redirectAttributes.addFlashAttribute("accountList", accountList);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +88,7 @@ public class CommonController {
     }
 
     @RequestMapping("/account")
-    public String account(Model model) {
+    public String account() {
         return "account";
     }
 
